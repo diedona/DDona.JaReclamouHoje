@@ -4,12 +4,13 @@
     {
         public Guid Id { get; private set; }
         public DateTime DataCriacao { get; private set; }
-        public DateTime DataAlteracao { get; private set; }
+        public DateTime? DataAlteracao { get; private set; }
 
-        protected EntidadeBase() 
-        { 
+        protected EntidadeBase()
+        {
             Id = Guid.NewGuid();
             DataCriacao = DateTime.UtcNow;
+            DataAlteracao = null;
         }
     }
 }
