@@ -18,5 +18,12 @@ namespace DDona.JaReclamouHoje.Testes.Entities
             EntidadeBase entidade = new Pessoa("Diego", "diego.dona");
             Assert.NotEqual(DateTime.MinValue, entidade.DataCriacao);
         }
+
+        [Fact]
+        public void Entidade_Criada_Nao_Deve_Ter_DataAlteracao()
+        {
+            EntidadeBase entidade = new Pessoa("Diego", "diego.dona");
+            Assert.Null(entidade.DataAlteracao);
+        }
     }
 }
