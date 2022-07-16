@@ -5,10 +5,8 @@ namespace DDona.JaReclamouHoje.Infra.Contexts
 {
     public class ReclamacoesDBContext : DbContext
     {
-        public ReclamacoesDBContext() : base()
-        {
-
-        }
+        public ReclamacoesDBContext() : base() { }
+        public ReclamacoesDBContext(DbContextOptions<ReclamacoesDBContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +19,11 @@ namespace DDona.JaReclamouHoje.Infra.Contexts
             configurationBuilder.Properties<string>()
                 .AreUnicode()
                 .HaveMaxLength(1000);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
