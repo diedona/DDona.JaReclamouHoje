@@ -1,4 +1,6 @@
-﻿namespace DDona.JaReclamouHoje.Api
+﻿using DDona.JaReclamouHoje.Api.Extensions;
+
+namespace DDona.JaReclamouHoje.Api
 {
     public class Startup
     {
@@ -14,6 +16,8 @@
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.ConfigurarOptions(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
