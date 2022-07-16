@@ -20,7 +20,10 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
 
         public Complemento CriarComplemento(Reclamacao reclamacao, string descricao)
         {
-            return new Complemento(this, reclamacao, descricao);
+            var complemento = new Complemento(this, reclamacao, descricao);
+            reclamacao.AdicionarComplemento(complemento);
+
+            return complemento;
         }
     }
 }
