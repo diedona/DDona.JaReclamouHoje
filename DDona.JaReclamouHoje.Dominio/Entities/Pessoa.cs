@@ -4,8 +4,11 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
 {
     public class Pessoa : EntidadeBase
     {
+        private readonly List<Reclamacao> _Reclamacoes = new();
+
         public string Nome { get; private set; }
         public string NomeDeUsuario { get; private set; }
+        public IReadOnlyCollection<Reclamacao> Reclamacoes => _Reclamacoes.AsReadOnly();
 
         public Pessoa(string nome, string nomeDeUsuario)
         {
@@ -15,7 +18,10 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
 
         public Reclamacao CriarReclamacao(Assunto assunto, string? descricao = null)
         {
-            return new Reclamacao(this, assunto, descricao);
+            var reclamacao = new Reclamacao(this, assunto, descricao);
+            _Reclamacoes.Add(reclamacao);
+
+            return reclamacao;
         }
 
         public Complemento CriarComplemento(Reclamacao reclamacao, string descricao)

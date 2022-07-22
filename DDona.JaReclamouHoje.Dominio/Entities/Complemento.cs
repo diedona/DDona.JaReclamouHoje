@@ -6,7 +6,7 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
     {
         public Pessoa Pessoa { get; private set; }
         public Reclamacao ReclamacaoOriginal { get; private set; }
-        public string Descricao { get; set; }
+        public string Descricao { get; private set; }
 
         public Complemento(Pessoa pessoa, Reclamacao reclamacaoOriginal, string descricao)
         {

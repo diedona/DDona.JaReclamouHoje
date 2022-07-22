@@ -4,7 +4,10 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
 {
     public class Assunto : EntidadeBase
     {
-        public string Descricao { get; set; }
+        private readonly List<Reclamacao> _Reclamacoes;
+
+        public string Descricao { get; private set; }
+        public IReadOnlyCollection<Reclamacao> Reclamacoes => _Reclamacoes.AsReadOnly();
 
         public Assunto(string descricao)
         {
