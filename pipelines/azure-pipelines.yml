@@ -35,3 +35,12 @@ stages:
             inputs:
               command: 'build'
               projects: $(backendProjectSrc)
+      - job: Test
+        dependsOn: Build
+        displayName: Tests
+        steps:
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'test'
+              projects: '$(backendProjectSrc)'
+              testRunTitle: 'Executando testes'
