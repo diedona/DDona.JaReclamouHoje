@@ -28,6 +28,7 @@ stages:
               projects: $(backendProjectSrc)
               feedsToUse: 'select'
       - job: Build
+        dependsOn: Restore
         displayName: Build
         steps:
           - task: DotNetCoreCLI@2
