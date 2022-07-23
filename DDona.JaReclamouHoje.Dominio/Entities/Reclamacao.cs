@@ -7,7 +7,9 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
         private readonly List<Complemento> _Complementos = new();
 
         public Pessoa Pessoa { get; private set; }
+        public Guid PessoaId { get; private set; }
         public Assunto Assunto { get; private set; }
+        public Guid AssuntoId { get; private set; }
         public string? Descricao { get; private set; }
         public bool Ativo { get; private set; }
         public IReadOnlyCollection<Complemento> Complementos => _Complementos.AsReadOnly();
