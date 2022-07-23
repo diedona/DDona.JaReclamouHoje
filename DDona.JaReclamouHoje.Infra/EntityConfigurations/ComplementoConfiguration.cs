@@ -14,6 +14,10 @@ namespace DDona.JaReclamouHoje.Infra.EntityConfigurations
 
             builder.HasOne(x => x.ReclamacaoOriginal)
                 .WithMany(x => x.Complementos);
+
+            builder.HasOne(x => x.PessoaQueComplementou)
+                .WithMany(pessoa => pessoa.Complementos)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
