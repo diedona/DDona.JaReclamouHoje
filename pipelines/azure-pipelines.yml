@@ -8,6 +8,10 @@ trigger:
     include:
       - main
 
+variables:
+  - name: backendProjectSrc
+    value: 'src/backend/**/*.csproj'
+
 pool:
   vmImage: ubuntu-latest
 
@@ -20,5 +24,10 @@ stages:
           - task: DotNetCoreCLI@2
             inputs:
               command: 'restore'
-              projects: 'src/backend/**/*.csproj'
+              projects: $(backendProjectSrc)
               feedsToUse: 'select'
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'build'
+              projects: $(backendProjectSrc)
+              arguments: '--configuration $(buildConfiguration)'
