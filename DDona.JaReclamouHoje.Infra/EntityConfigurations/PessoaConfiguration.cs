@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DDona.JaReclamouHoje.Infra.EntityConfigurations
 {
-    public class AssuntoConfiguration : IEntityTypeConfiguration<Assunto>
+    public class PessoaConfiguration : IEntityTypeConfiguration<Pessoa>
     {
-        public void Configure(EntityTypeBuilder<Assunto> builder)
+        public void Configure(EntityTypeBuilder<Pessoa> builder)
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasMany(assunto => assunto.Reclamacoes)
-                .WithOne(reclamacao => reclamacao.Assunto);
+            builder.HasMany(x => x.Reclamacoes)
+                .WithOne(x => x.Pessoa);
         }
     }
 }

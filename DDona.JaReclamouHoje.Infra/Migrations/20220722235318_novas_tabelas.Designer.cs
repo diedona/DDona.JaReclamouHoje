@@ -4,6 +4,7 @@ using DDona.JaReclamouHoje.Infra.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DDona.JaReclamouHoje.Infra.Migrations
 {
     [DbContext(typeof(ReclamacoesDBContext))]
-    partial class ReclamacoesDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220722235318_novas_tabelas")]
+    partial class novas_tabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

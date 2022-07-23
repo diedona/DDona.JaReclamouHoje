@@ -13,6 +13,8 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
         public bool Ativo { get; private set; }
         public ReadOnlyCollection<Complemento> Complementos => _Complementos.AsReadOnly();
 
+        private Reclamacao() { }
+
         public Reclamacao(Pessoa pessoa, Assunto assunto, string? descricao)
         {
             Pessoa = pessoa;
