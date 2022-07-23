@@ -14,7 +14,9 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
         public bool Ativo { get; private set; }
         public IReadOnlyCollection<Complemento> Complementos => _Complementos.AsReadOnly();
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private Reclamacao() { }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         public Reclamacao(Pessoa pessoa, Assunto assunto, string? descricao)
         {

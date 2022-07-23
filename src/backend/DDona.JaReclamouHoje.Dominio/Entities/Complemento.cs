@@ -8,11 +8,13 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
         public Pessoa PessoaQueComplementou { get; private set; }
         public string Descricao { get; private set; }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private Complemento() { }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        public Complemento(Reclamacao reclamacao, Pessoa pessoaQueComplementou, string descricao)
+        public Complemento(Reclamacao reclamacaoOriginal, Pessoa pessoaQueComplementou, string descricao)
         {
-            ReclamacaoOriginal = reclamacao;
+            ReclamacaoOriginal = reclamacaoOriginal;
             Descricao = descricao;
             PessoaQueComplementou = pessoaQueComplementou;
         }
