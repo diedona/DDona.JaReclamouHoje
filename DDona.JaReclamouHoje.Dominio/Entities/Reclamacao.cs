@@ -1,5 +1,4 @@
 ﻿using DDona.JaReclamouHoje.Dominio.Entities.Base;
-using System.Collections.ObjectModel;
 
 namespace DDona.JaReclamouHoje.Dominio.Entities
 {
@@ -11,7 +10,7 @@ namespace DDona.JaReclamouHoje.Dominio.Entities
         public Assunto Assunto { get; private set; }
         public string? Descricao { get; private set; }
         public bool Ativo { get; private set; }
-        public ReadOnlyCollection<Complemento> Complementos => _Complementos.AsReadOnly();
+        public IReadOnlyCollection<Complemento> Complementos => _Complementos.AsReadOnly();
 
         private Reclamacao() { }
 

@@ -2,6 +2,7 @@
 using DDona.JaReclamouHoje.Dominio.Entities;
 using DDona.JaReclamouHoje.Infra.Contexts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace DDona.JaReclamouHoje.Api.Controllers
@@ -22,8 +23,8 @@ namespace DDona.JaReclamouHoje.Api.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            var assuntos = _Context.Set<Assunto>().ToList();
-            return Ok(assuntos);
+            List<Pessoa> data = _Context.Set<Pessoa>().Include(x => x.Reclamacoes).ToList();
+            return Ok(data);
         }
     }
 }
