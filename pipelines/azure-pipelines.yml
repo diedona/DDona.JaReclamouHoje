@@ -15,6 +15,7 @@ variables:
 pool:
   vmImage: ubuntu-latest
 
+name: 'Main Pipeline'
 stages:
   - stage: Backend
     displayName: "Backend"
