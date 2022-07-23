@@ -20,14 +20,17 @@ stages:
     displayName: "Backend"
     jobs:
       - job: Restore
+        displayName: Restore
         steps:
           - task: DotNetCoreCLI@2
             inputs:
               command: 'restore'
               projects: $(backendProjectSrc)
               feedsToUse: 'select'
+      - job: Build
+        displayName: Build
+        steps:
           - task: DotNetCoreCLI@2
             inputs:
               command: 'build'
               projects: $(backendProjectSrc)
-              arguments: '--configuration $(buildConfiguration)'
