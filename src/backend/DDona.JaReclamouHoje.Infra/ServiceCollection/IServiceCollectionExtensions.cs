@@ -1,4 +1,6 @@
-﻿using DDona.JaReclamouHoje.Infra.Contexts;
+﻿using DDona.JaReclamouHoje.Dominio.Repositories;
+using DDona.JaReclamouHoje.Infra.Contexts;
+using DDona.JaReclamouHoje.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,13 @@ namespace DDona.JaReclamouHoje.Infra.ServiceCollection
         {
             services.AddDbContext<ReclamacoesDBContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            return services;
+        }
+
+        public static IServiceCollection AdicionarRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IPessoaRepository, PessoaRepository>();
 
             return services;
         }

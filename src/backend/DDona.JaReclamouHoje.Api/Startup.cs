@@ -1,9 +1,5 @@
 ﻿using DDona.JaReclamouHoje.Api.Extensions;
-using DDona.JaReclamouHoje.Infra.Contexts;
 using DDona.JaReclamouHoje.Infra.ServiceCollection;
-using Microsoft.AspNetCore.Http.Json;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
 
 namespace DDona.JaReclamouHoje.Api
 {
@@ -18,11 +14,12 @@ namespace DDona.JaReclamouHoje.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            services.AdicionarControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.ConfigurarOptions(Configuration);
             services.AddEntityFrameworkCore(Configuration);
+            services.AdicionarRepositories();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)

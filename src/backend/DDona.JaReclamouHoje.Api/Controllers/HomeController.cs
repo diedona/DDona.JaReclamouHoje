@@ -1,8 +1,6 @@
 ﻿using DDona.JaReclamouHoje.Api.Models.AppSettings;
-using DDona.JaReclamouHoje.Dominio.Entities;
-using DDona.JaReclamouHoje.Infra.Contexts;
+using DDona.JaReclamouHoje.Dominio.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace DDona.JaReclamouHoje.Api.Controllers
@@ -12,19 +10,19 @@ namespace DDona.JaReclamouHoje.Api.Controllers
     public class HomeController : ControllerBase
     {
         private readonly MockSettingsOptions _MockSettingsOptions;
-        private readonly ReclamacoesDBContext _Context;
+        private readonly IPessoaRepository _PessoaRepository;
 
-        public HomeController(IOptions<MockSettingsOptions> mockSettingsOptions, ReclamacoesDBContext context)
+        public HomeController(IOptions<MockSettingsOptions> mockSettingsOptions, IPessoaRepository pessoaRepository)
         {
             _MockSettingsOptions = mockSettingsOptions.Value;
-            _Context = context;
+            _PessoaRepository = pessoaRepository;
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            List<Pessoa> data = _Context.Set<Pessoa>().Include(x => x.Reclamacoes).ToList();
-            return Ok(data);
+            var pessoas = await _PessoaRepository.ObterTodos();
+            return Ok(pessoas);
         }
     }
 }
