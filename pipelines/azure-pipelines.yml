@@ -18,8 +18,7 @@ variables:
     value: 'ubuntu-latest'
 
 stages:
-  - stage: Backend
-    displayName: "Backend"
+  - stage: DEV
     jobs:
       - job: CI
         pool:
@@ -63,11 +62,11 @@ stages:
           vmImage: $(vmImageUbuntu)
         displayName: 'CD'
         steps:
-          - task: Bash@3
-            displayName: 'teste só'
+          - task: AzureRmWebAppDeployment@4
             inputs:
-              targetType: 'inline'
-              script: |
-                # Write your commands here
-                
-                echo 'Hello world'
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Pago pelo Uso(7846457b-4101-4623-8ce2-132a758e68e3)'
+              appType: 'webAppLinux'
+              WebAppName: 'ja-reclamou-hoje'
+              packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+              RuntimeStack: 'DOTNETCORE|6.0'
