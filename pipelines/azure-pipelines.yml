@@ -58,6 +58,7 @@ stages:
 
       - job: CD
         dependsOn: CI
+        condition: succeded()
         pool:
           vmImage: $(vmImageUbuntu)
         displayName: 'CD'
