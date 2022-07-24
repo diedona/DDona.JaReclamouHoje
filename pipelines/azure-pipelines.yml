@@ -14,7 +14,7 @@ trigger:
 variables:
   - name: backendProjectSrc
     value: 'src/backend/**/*.csproj'
-  - name: vmImageUbuntu
+  - name: vmImageLinux
     value: 'ubuntu-latest'
     
     # necessário pra rodar as sql migrations
@@ -26,7 +26,7 @@ stages:
     jobs:
       - job: CI
         pool:
-          vmImage: $(vmImageUbuntu)
+          vmImage: $(vmImageLinux)
         displayName: 'CI'
         steps:
           - task: DotNetCoreCLI@2
@@ -69,7 +69,7 @@ stages:
             inputs:
               command: 'custom'
               custom: 'ef'
-              arguments: migrations script --output $(Build.ArtifactStagingDirectory)/SQL/scripts.sql --project $(Build.SourcesDirectory)/src/backend/DDona.JaReclamouHoje.Api/DDona.JaReclamouHoje.Api.csproj              
+              arguments: migrations script --output $(Build.ArtifactStagingDirectory)/SQL/scripts.sql --idempotent --project $(Build.SourcesDirectory)/src/backend/DDona.JaReclamouHoje.Api/DDona.JaReclamouHoje.Api.csproj              
           - task: PublishBuildArtifacts@1
             displayName: 'Enviando arquivos APP'
             inputs:
