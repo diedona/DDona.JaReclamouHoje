@@ -24,5 +24,11 @@ namespace DDona.JaReclamouHoje.Api.Controllers
             var pessoas = await _PessoaRepository.ObterTodos();
             return Ok(pessoas);
         }
+
+        [HttpGet("hello-world")]
+        public ActionResult HelloWorld()
+        {
+            return Ok("oi debrão");
+        }
     }
 }
