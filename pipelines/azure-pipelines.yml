@@ -48,8 +48,14 @@ stages:
               command: 'publish'
               publishWebProjects: true
               arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+          - task: DotNetCoreCLI@2
+            displayName: 'Gerando script sql'
+            inputs:
+              command: 'custom'
+              custom: 'ef'
+              arguments: migrations script --output $(Build.ArtifactStagingDirectory)/SQL/scripts.sql --project $(Build.SourcesDirectory)/src/backend/DDona.JaReclamouHoje.Api/DDona.JaReclamouHoje.Api.csproj              
           - task: PublishBuildArtifacts@1
-            displayName: 'Enviando arquivos'
+            displayName: 'Enviando arquivos APP'
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'drop'
