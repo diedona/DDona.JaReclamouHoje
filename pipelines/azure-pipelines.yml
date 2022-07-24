@@ -81,7 +81,7 @@ stages:
         displayName: 'CD'
         steps:
           - task: DownloadBuildArtifacts@1
-            displayName: 'Download do artefato'
+            displayName: 'Download dos artefatos'
             inputs:
               buildType: 'current'
               downloadType: 'single'
@@ -96,3 +96,14 @@ stages:
               WebAppName: 'ja-reclamou-hoje'
               packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
               RuntimeStack: 'DOTNETCORE|6.0'
+          - task: SqlAzureDacpacDeployment@1
+            inputs:
+              azureSubscription: 'Pago pelo Uso(7846457b-4101-4623-8ce2-132a758e68e3)'
+              AuthenticationType: 'server'
+              ServerName: '$(sqlServerName)'
+              DatabaseName: '$(sqlDatabaseName)'
+              SqlUsername: '$(sqlUserName)'
+              SqlPassword: '$(sqlPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(System.ArtifactsDirectory)/drop/SQL/scripts.sql'
+              IpDetectionMethod: 'AutoDetect'
