@@ -16,8 +16,10 @@ variables:
     value: 'src/backend/**/*.csproj'
   - name: vmImageUbuntu
     value: 'ubuntu-latest'
+    
+    # necessário pra rodar as sql migrations
   - name: vmImageWindows
-    value: 'windows-latest'    
+    value: 'windows-latest'
 
 stages:
   - stage: DEV
@@ -75,12 +77,12 @@ stages:
               ArtifactName: 'drop'
               publishLocation: 'Container'
 
-      - job: CD
+      - job: CD_App
         dependsOn: CI
         condition: succeeded()
         pool:
-          vmImage: $(vmImageWindows)
-        displayName: 'CD'
+          vmImage: $(vmImageLinux)
+        displayName: 'CD App'
         steps:
           - task: DownloadBuildArtifacts@1
             displayName: 'Download dos artefatos'
@@ -98,6 +100,21 @@ stages:
               WebAppName: 'ja-reclamou-hoje'
               packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
               RuntimeStack: 'DOTNETCORE|6.0'
+
+      - job: CD_Db
+        dependsOn: CI
+        condition: succeeded()
+        pool:
+          vmImage: $(vmImageWindows)
+        displayName: 'CD Database'
+        steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download dos artefatos'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(System.ArtifactsDirectory)'        
           - task: SqlAzureDacpacDeployment@1
             inputs:
               azureSubscription: 'Pago pelo Uso(7846457b-4101-4623-8ce2-132a758e68e3)'
