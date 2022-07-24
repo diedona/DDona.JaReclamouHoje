@@ -62,11 +62,19 @@ stages:
           vmImage: $(vmImageUbuntu)
         displayName: 'CD'
         steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: 'Download do artefato'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(System.ArtifactsDirectory)'
           - task: AzureRmWebAppDeployment@4
+            displayName: 'deploy azure'
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: 'Pago pelo Uso(7846457b-4101-4623-8ce2-132a758e68e3)'
               appType: 'webAppLinux'
               WebAppName: 'ja-reclamou-hoje'
-              packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+              packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
               RuntimeStack: 'DOTNETCORE|6.0'
