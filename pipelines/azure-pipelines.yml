@@ -14,15 +14,16 @@ trigger:
 variables:
   - name: backendProjectSrc
     value: 'src/backend/**/*.csproj'
-
-pool:
-  vmImage: ubuntu-latest
+  - name: vmImageUbuntu
+    value: 'ubuntu-latest'
 
 stages:
   - stage: Backend
     displayName: "Backend"
     jobs:
       - job: CI
+        pool:
+          vmImage: $(vmImageUbuntu)
         displayName: 'CI'
         steps:
           - task: DotNetCoreCLI@2
