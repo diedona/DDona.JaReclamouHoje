@@ -16,6 +16,8 @@ variables:
     value: 'src/backend/**/*.csproj'
   - name: vmImageUbuntu
     value: 'ubuntu-latest'
+  - name: vmImageWindows
+    value: 'windows-latest'    
 
 stages:
   - stage: DEV
@@ -77,7 +79,7 @@ stages:
         dependsOn: CI
         condition: succeeded()
         pool:
-          vmImage: $(vmImageUbuntu)
+          vmImage: $(vmImageWindows)
         displayName: 'CD'
         steps:
           - task: DownloadBuildArtifacts@1
