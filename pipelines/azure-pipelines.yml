@@ -27,6 +27,7 @@ stages:
               command: 'restore'
               projects: $(backendProjectSrc)
               feedsToUse: 'select'
+
       - job: Build
         dependsOn: Restore
         displayName: Build
@@ -35,12 +36,23 @@ stages:
             inputs:
               command: 'build'
               projects: $(backendProjectSrc)
+
       - job: Test
         dependsOn: Build
-        displayName: Tests
+        displayName: Test
         steps:
           - task: DotNetCoreCLI@2
             inputs:
               command: 'test'
               projects: '$(backendProjectSrc)'
               testRunTitle: 'Executando testes'
+              
+      - job: Publish
+        dependsOn: Test
+        displayName: Publish
+        steps:
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
