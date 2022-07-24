@@ -55,3 +55,18 @@ stages:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'drop'
               publishLocation: 'Container'
+
+      - job: CD
+        dependsOn: CI
+        pool:
+          vmImage: $(vmImageUbuntu)
+        displayName: 'CD'
+        steps:
+          - task: Bash@3
+            displayName: 'teste só'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your commands here
+                
+                echo 'Hello world'
