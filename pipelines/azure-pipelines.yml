@@ -56,3 +56,8 @@ stages:
               command: 'publish'
               publishWebProjects: true
               arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
