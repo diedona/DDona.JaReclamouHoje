@@ -22,44 +22,34 @@ stages:
   - stage: Backend
     displayName: "Backend"
     jobs:
-      - job: Restore
-        displayName: Restore
+      - job: CI
+        displayName: 'CI'
         steps:
           - task: DotNetCoreCLI@2
+            displayName: 'Restaurando'
             inputs:
               command: 'restore'
               projects: $(backendProjectSrc)
               feedsToUse: 'select'
-
-      - job: Build
-        dependsOn: Restore
-        displayName: Build
-        steps:
           - task: DotNetCoreCLI@2
+            displayName: 'Fazendo Build'
             inputs:
               command: 'build'
               projects: $(backendProjectSrc)
-
-      - job: Test
-        dependsOn: Build
-        displayName: Test
-        steps:
           - task: DotNetCoreCLI@2
+            displayName: 'Rodando Testes de Unidade'
             inputs:
               command: 'test'
               projects: '$(backendProjectSrc)'
               testRunTitle: 'Executando testes'
-              
-      - job: Publish
-        dependsOn: Test
-        displayName: Publish
-        steps:
           - task: DotNetCoreCLI@2
+            displayName: 'Gerando Publish'
             inputs:
               command: 'publish'
               publishWebProjects: true
               arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
           - task: PublishBuildArtifacts@1
+            displayName: 'Enviando arquivos'
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'drop'
