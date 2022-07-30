@@ -92,23 +92,15 @@ stages:
               Dockerfile: '**/Dockerfile'
               buildContext: '$(Build.Repository.LocalPath)/src/backend' # importante passar a raiz dos projetos api
               tags: '$(Build.BuildId)'
-          - task: DownloadBuildArtifacts@1
-            displayName: 'Download dos artefatos APP'
-            inputs:
-              buildType: 'current'
-              downloadType: 'single'
-              artifactName: 'drop'
-              itemPattern: '**/*.zip' # apenas a aplicação (que foi zipada)
-              downloadPath: '$(System.ArtifactsDirectory)'
           - task: AzureRmWebAppDeployment@4
-            displayName: 'deploy azure'
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: 'Pago pelo Uso(7846457b-4101-4623-8ce2-132a758e68e3)'
-              appType: 'webAppLinux'
+              appType: 'webAppContainer'
               WebAppName: 'ja-reclamou-hoje'
-              packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
-              RuntimeStack: 'DOTNETCORE|6.0'
+              DockerNamespace: 'diedona'
+              DockerRepository: 'ja-reclamou-hoje-api'
+              DockerImageTag: '$(Build.BuildId)'
 
       - job: CD_Db
         dependsOn: CI
