@@ -34,6 +34,9 @@ stages:
             inputs:
               containerRegistry: 'docker-registry'
               command: 'login'
+          - task: CmdLine@2
+            inputs:
+              script: 'echo $(Build.Repository.LocalPath)'
           - task: Docker@2
             inputs:
               containerRegistry: 'docker-registry'
