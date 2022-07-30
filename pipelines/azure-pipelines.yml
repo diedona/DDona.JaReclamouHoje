@@ -25,8 +25,6 @@ stages:
   - stage: DEV
     jobs:
       - job: CD_App
-        dependsOn: CI
-        condition: succeeded()
         pool:
           vmImage: $(vmImageLinux)
         displayName: 'CD App'
