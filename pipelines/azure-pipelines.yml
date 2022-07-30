@@ -43,5 +43,5 @@ stages:
               repository: 'ja-reclamou-hoje-api'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
-              buildContext: '$(Build.Repository.LocalPath)'
+              buildContext: '$(Build.Repository.LocalPath)/src/backend'
               tags: 'JaReclamouHojeApi_$(Build.BuildId)'
