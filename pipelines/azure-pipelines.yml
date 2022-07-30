@@ -47,17 +47,11 @@ stages:
               projects: '$(backendProjectSrc)'
               testRunTitle: 'Executando testes'
           - task: DotNetCoreCLI@2
-            displayName: 'Gerando Publish'
-            inputs:
-              command: 'publish'
-              publishWebProjects: true
-              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
-          - task: DotNetCoreCLI@2
             displayName: manifesto
             inputs:
               command: custom
               custom: 'new '
-              arguments: tool-manifest              
+              arguments: tool-manifest
           - task: DotNetCoreCLI@2
             displayName: Instalando EF Tool
             inputs:
