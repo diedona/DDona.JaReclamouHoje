@@ -85,6 +85,18 @@ stages:
           vmImage: $(vmImageLinux)
         displayName: 'CD App'
         steps:
+          - task: Docker@2
+            displayName: 'login docker'
+            inputs:
+              containerRegistry: 'docker-registry'
+              command: 'login'
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'docker-registry'
+              repository: 'ja-reclamou-hoje-api'
+              command: 'buildAndPush'
+              Dockerfile: '**/Dockerfile'
+              tags: 'JaReclamouHojeApi_$(Build.BuildId)'
           - task: DownloadBuildArtifacts@1
             displayName: 'Download dos artefatos APP'
             inputs:
