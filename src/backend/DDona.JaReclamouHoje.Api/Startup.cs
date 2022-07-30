@@ -14,6 +14,7 @@ namespace DDona.JaReclamouHoje.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigurarAppInsights();
             services.AdicionarControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
