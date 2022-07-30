@@ -96,6 +96,7 @@ stages:
               repository: 'ja-reclamou-hoje-api'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
+              buildContext: 'src/backend/DDona.JaReclamouHoje.Api/**'
               tags: 'JaReclamouHojeApi_$(Build.BuildId)'
           - task: DownloadBuildArtifacts@1
             displayName: 'Download dos artefatos APP'
