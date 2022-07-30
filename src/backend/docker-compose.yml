@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  ddona.jareclamouhoje.api:
+    image: ${DOCKER_REGISTRY-}ddonajareclamouhojeapi
+    build:
+      context: .
+      dockerfile: DDona.JaReclamouHoje.Api/Dockerfile
