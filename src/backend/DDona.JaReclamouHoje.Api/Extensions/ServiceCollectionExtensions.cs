@@ -1,4 +1,5 @@
-﻿using DDona.JaReclamouHoje.Api.Models.AppSettings;
+﻿using DDona.JaReclamouHoje.Api.Background;
+using DDona.JaReclamouHoje.Api.Models.AppSettings;
 using Microsoft.ApplicationInsights;
 using System.Text.Json.Serialization;
 
@@ -22,6 +23,16 @@ namespace DDona.JaReclamouHoje.Api.Extensions
         {
             services.AddApplicationInsightsTelemetry();
             services.AddSingleton<TelemetryClient>();
+
+            return services;
+        }
+
+        public static IServiceCollection AdicionarBackgroundTasks(this IServiceCollection services, IWebHostEnvironment environment)
+        {
+            if (environment.IsDevelopment())
+            {
+                services.AddHostedService<AtualizarBancoDeDadosBackgroundService>();
+            }
 
             return services;
         }

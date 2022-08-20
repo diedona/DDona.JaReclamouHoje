@@ -6,10 +6,12 @@ namespace DDona.JaReclamouHoje.Api
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -21,6 +23,7 @@ namespace DDona.JaReclamouHoje.Api
             services.ConfigurarOptions(Configuration);
             services.AddEntityFrameworkCore(Configuration);
             services.AdicionarRepositories();
+            services.AdicionarBackgroundTasks(Environment);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
